@@ -1,83 +1,120 @@
 // --- Colors ---
-$color-white: #FFFFFF;
+$color-white: #ffffff;
 $color-black: #000000;
-$color-grey-200: #D8D8D8;
-$color-blue-100: #E5EAF1;
-$color-blue-50:  #F6FAFF;
+$color-grey-200: #d8d8d8;
+$color-blue-100: #e5eaf1;
+$color-blue-50: #f6faff;
 
-$gradient-1: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 60%);
+@mixin gradient-1($radius) {
+  background: linear-gradient(
+    $radius,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 60%
+  );
+}
 
 // --- Spacing (Base 1rem = 10px) ---
-$spacing-0:    0;
-$spacing-100:  0.8rem; // 8px
-$spacing-200:  1.6rem; // 16px
-$spacing-300:  2.4rem; // 24px
-$spacing-400:  3.2rem; // 32px
-$spacing-500:  4.0rem; // 40px
-$spacing-600:  4.8rem; // 48px
-$spacing-800:  6.4rem; // 64px
-$spacing-1000: 8.0rem; // 80px
+$spacing-0: 0;
+$spacing-100: 0.8rem; // 8px
+$spacing-200: 1.6rem; // 16px
+$spacing-300: 2.4rem; // 24px
+$spacing-400: 3.2rem; // 32px
+$spacing-500: 4rem; // 40px
+$spacing-600: 4.8rem; // 48px
+$spacing-800: 6.4rem; // 64px
+$spacing-1000: 8rem; // 80px
 
 // --- Typography Config ---
-$font-josefin: 'Josefin Sans', sans-serif;
-$font-alata:   'Alata', sans-serif;
-
-
+$font-josefin: "Josefin Sans", sans-serif;
+$font-alata: "Alata", sans-serif;
 
 // --- Typography Mixins ---
 
 @mixin text-preset-1 {
-    font-family: $font-josefin;
-    font-size: 7.2rem; // 72px
-    font-weight: 300;  // Light
-    line-height: 1;    // 100%
-    letter-spacing: 0;
+  font-family: $font-josefin;
+  font-size: 7.2rem; // 72px
+  font-weight: 300; // Light
+  line-height: 1; // 100%
+  letter-spacing: 0;
 }
 
 @mixin text-preset-2 {
-    font-family: $font-josefin;
-    font-size: 4.8rem; // 48px
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: 0;
+  font-family: $font-josefin;
+  font-size: 4.8rem; // 48px
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 @mixin text-preset-3 {
-    font-family: $font-josefin;
-    font-size: 4.0rem; // 40px
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: 0;
+  font-family: $font-josefin;
+  font-size: 4rem; // 40px
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 @mixin text-preset-4 {
-    font-family: $font-josefin;
-    font-size: 3.2rem; // 32px
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: 0;
+  font-family: $font-josefin;
+  font-size: 3.2rem; // 32px
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 @mixin text-preset-5 {
-    font-family: $font-josefin;
-    font-size: 2.4rem; // 24px
-    font-weight: 300;
-    line-height: 1;
-    letter-spacing: 0;
+  font-family: $font-josefin;
+  font-size: 2.4rem; // 24px
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 @mixin text-preset-6 {
-    font-family: $font-alata;
-    font-size: 1.5rem; // 15px
-    font-weight: 400; // Regular
-    line-height: 1.65; // 165%
-    letter-spacing: 0;
+  font-family: $font-alata;
+  font-size: 1.5rem; // 15px
+  font-weight: 400; // Regular
+  line-height: 1.65; // 165%
+  letter-spacing: 0;
 }
 
 @mixin text-preset-7 {
-    font-family: $font-alata;
-    font-size: 1.4rem; // 14px
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0.5rem; // 5px Letter Spacing
+  font-family: $font-alata;
+  font-size: 1.4rem; // 14px
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.5rem; // 5px Letter Spacing
+}
+
+@mixin text-title {
+  text-transform: uppercase;
+  @include text-preset-4;
+  text-align: center;
+
+  @media (min-width: 48rem) {
+    @include text-preset-2;
+  }
+}
+
+@mixin image-center {
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+@mixin link-hover($parent) {
+  #{$parent}::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: $color-white;
+    transition: width 300ms ease;
+    transform: translateX(-50%);
+    bottom: -0.5rem;
+    left: 50%;
+  }
+  #{$parent}:hover::after {
+    width: 80%;
+  }
 }

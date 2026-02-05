@@ -1,3 +1,406 @@
-@use 'abstract' as *;
-@use 'base';
+@use "abstract" as *;
+@use "base";
 
+.body {
+  display: grid;
+  gap: 9.6rem;
+}
+
+.header {
+  min-height: 100vh;
+  background: url("../images/mobile/image-hero.jpg") center / cover;
+  padding-block: clamp(1.6rem, calc(1.029rem + 1.786vw), 2.4rem);
+
+  &__title {
+    color: $color-white;
+    @include text-preset-3;
+    font-size: clamp(3.2rem, calc(2.643rem + 1.739vw), 4rem);
+    padding: clamp(1.8rem, calc(0.229rem + 4.911vw), 4rem)
+      clamp(2.4rem, calc(1.257rem + 3.571vw), 4rem);
+    border: 1px solid $color-white;
+    align-self: center;
+    text-transform: uppercase;
+    bottom: 50%;
+    transform: translateY(50%);
+    position: absolute;
+    max-width: 65rem;
+  }
+
+  & .wrapper {
+    position: relative;
+    height: 100%;
+  }
+}
+
+.wrapper {
+  width: min(90%, 111rem);
+  margin: auto;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+
+  &__menu {
+    border: none;
+    background-color: transparent;
+    z-index: 250;
+  }
+
+  &__menu-close {
+    display: none;
+  }
+
+  &:has(.nav__list[aria-expanded="true"]) &__menu-close {
+    display: block;
+  }
+  &:has(.nav__list[aria-expanded="true"]) &__menu-icon {
+    display: none;
+  }
+
+  &__logo {
+    z-index: 250;
+  }
+
+  &__list {
+    position: fixed;
+    background-color: $color-black;
+    color: $color-white;
+    @include text-preset-5;
+    display: grid;
+    gap: $spacing-300;
+    padding: 0;
+    list-style: none;
+    inset: 0 0 0 100%;
+    width: 100%;
+    height: 100vh;
+    z-index: 200;
+    justify-content: center;
+    align-content: center;
+    transition: inset 300ms ease;
+  }
+  &__list[aria-expanded="true"] {
+    inset: 0 0 0 0;
+  }
+  &__link {
+    color: $color-white;
+    text-decoration: none;
+  }
+}
+
+.about {
+  & .wrapper {
+    display: grid;
+    gap: $spacing-600;
+  }
+
+  &__content {
+    display: grid;
+    gap: $spacing-200;
+    max-width: 27.9rem;
+    margin: auto;
+  }
+
+  &__title {
+    @include text-title;
+  }
+
+  &__description {
+    @include text-preset-6;
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  &__image {
+    @include image-center;
+  }
+}
+
+.creations {
+  & .wrapper {
+    display: grid;
+    gap: $spacing-400;
+  }
+  &__title {
+    @include text-title;
+    margin-bottom: $spacing-200;
+  }
+  &__list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: $spacing-300;
+  }
+
+  &__button {
+    padding: 1.3rem 4rem;
+    @include text-preset-7;
+    background-color: transparent;
+    border: 1px solid black;
+    width: fit-content;
+    margin-inline: auto;
+    transition:
+      background-color 300ms ease,
+      color 600ms ease;
+  }
+  &__button:hover {
+    background-color: $color-black;
+    color: $color-white;
+  }
+}
+
+.creation {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: $color-white;
+    opacity: 0;
+    transition: opacity 300ms ease;
+    z-index: 100;
+  }
+
+  &:hover::before {
+    opacity: 0.75;
+  }
+
+  &__image {
+    max-height: 12rem;
+    @include image-center;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0 30% 0 0;
+    @include gradient-1(270deg);
+    z-index: 10;
+  }
+
+  &__title {
+    position: absolute;
+    color: $color-white;
+    bottom: 2rem;
+    left: 2rem;
+    @include text-preset-5;
+    z-index: 100;
+    transition: color 600ms ease;
+  }
+
+  &:hover &__title {
+    color: $color-black;
+  }
+}
+
+.footer {
+  background-color: $color-black;
+  padding-block: 5.6rem;
+
+  & .wrapper {
+    display: grid;
+    gap: $spacing-500;
+  }
+
+  &__logo {
+    margin: auto;
+  }
+
+  &__credit {
+    color: $color-white;
+    opacity: 0.5;
+    text-align: center;
+    margin-top: calc($spacing-300 * -1);
+  }
+}
+
+.footer-nav {
+  display: grid;
+  gap: $spacing-200;
+  justify-items: center;
+  padding: 0;
+  &__link {
+    color: $color-white;
+    @include text-preset-6;
+    text-decoration: none;
+    position: relative;
+  }
+  &__link::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: $color-white;
+    transition: width 300ms ease;
+    transform: translateX(-50%);
+    bottom: -0.5rem;
+    left: 50%;
+  }
+  &__link:hover::after {
+    width: 80%;
+  }
+}
+.social-media {
+  display: flex;
+  gap: $spacing-200;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+@media (min-width: 48rem) {
+  .header {
+    &__title {
+      @include text-preset-1;
+      bottom: 40%;
+    }
+  }
+
+  .about {
+    &__content {
+      max-width: none;
+    }
+
+    &__content {
+      gap: $spacing-300;
+    }
+  }
+
+  .footer {
+    & .wrapper {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-300;
+    }
+
+    &__logo {
+      order: 1;
+      margin: 0;
+    }
+
+    &__credit {
+      order: 4;
+      margin: 0;
+      text-align: end;
+    }
+  }
+
+  .footer-nav {
+    display: flex;
+    order: 3;
+  }
+
+  .social-media {
+    order: 2;
+    justify-self: end;
+  }
+
+  .creation {
+    &__title {
+      max-width: 15rem;
+    }
+  }
+  .creations {
+    &__title {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (min-width: 90rem) {
+  .nav {
+    &__logo {
+      height: min-content;
+    }
+
+    &__menu {
+      display: none;
+    }
+
+    &__list {
+      inset: 0;
+      position: relative;
+      background-color: transparent;
+      display: flex;
+      width: fit-content;
+    }
+
+    &__link::after {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 2px;
+      background-color: $color-white;
+      transition: width 300ms ease;
+      transform: translateX(-50%);
+      bottom: -0.5rem;
+      left: 50%;
+    }
+    &__link:hover::after {
+      width: 80%;
+    }
+  }
+
+  .about {
+    & .wrapper {
+      position: relative;
+    }
+
+    &__image {
+      width: 70%;
+    }
+
+    &__content {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      background-color: $color-white;
+      max-width: 54rem;
+      min-height: 37rem;
+      padding: 9.6rem 0 0 9.6rem;
+      gap: $spacing-300;
+    }
+  }
+
+  .creations {
+    & .wrapper {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-1000;
+    }
+    &__title {
+      text-align: start;
+      margin: 0;
+    }
+    &__list {
+      grid-template-columns: repeat(4, 1fr);
+      order: 3;
+      grid-column: 1/3;
+      gap: $spacing-400;
+    }
+    &__button {
+      order: 2;
+      justify-self: end;
+      align-self: center;
+      margin: 0;
+    }
+  }
+
+  .creation {
+    &__image {
+      min-height: 45rem;
+    }
+    &__title {
+      @include text-preset-4;
+      bottom: 3.2rem;
+      inset-inline: 4rem;
+      max-width: none;
+    }
+    &::after {
+      inset: 30% 0 0 0;
+      @include gradient-1(180deg);
+      z-index: 10;
+    }
+  }
+}
