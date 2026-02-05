@@ -128,14 +128,15 @@ h6 {
   border: none;
   background-color: transparent;
   z-index: 250;
+  cursor: pointer;
 }
 .nav__menu-close {
   display: none;
 }
-.nav:has(.nav__list[aria-expanded=true]) .nav__menu-close {
+.nav:has(.nav__menu[aria-expanded=true]) .nav__menu-close {
   display: block;
 }
-.nav:has(.nav__list[aria-expanded=true]) .nav__menu-icon {
+.nav:has(.nav__menu[aria-expanded=true]) .nav__menu-icon {
   display: none;
 }
 .nav__logo {
@@ -162,7 +163,7 @@ h6 {
   align-content: center;
   transition: inset 300ms ease;
 }
-.nav__list[aria-expanded=true] {
+.nav:has(.nav__menu[aria-expanded=true]) .nav__list {
   inset: 0 0 0 0;
 }
 .nav__link {

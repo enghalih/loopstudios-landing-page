@@ -47,16 +47,17 @@
     border: none;
     background-color: transparent;
     z-index: 250;
+    cursor: pointer;
   }
 
   &__menu-close {
     display: none;
   }
 
-  &:has(.nav__list[aria-expanded="true"]) &__menu-close {
+  &:has(.nav__menu[aria-expanded="true"]) &__menu-close {
     display: block;
   }
-  &:has(.nav__list[aria-expanded="true"]) &__menu-icon {
+  &:has(.nav__menu[aria-expanded="true"]) &__menu-icon {
     display: none;
   }
 
@@ -81,7 +82,7 @@
     align-content: center;
     transition: inset 300ms ease;
   }
-  &__list[aria-expanded="true"] {
+  &:has(.nav__menu[aria-expanded="true"]) &__list {
     inset: 0 0 0 0;
   }
   &__link {
